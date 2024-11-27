@@ -34,7 +34,8 @@
             "Hi, it's nice to talk to you",
             "Hello! Are you there?",
             "Hi, just checking in!",
-            "Good day, how can you help me?"
+            "Good day, how can you help me?",
+            "Namaste"
           ],
           "responses": [
             "Hello! How can I assist you today?",
@@ -77,7 +78,8 @@
       "Until next time",
       "Adios",
       "Ciao",
-      "So long"
+      "So long",
+      "Tata"
         ],
         "responses": [
           "Goodbye! Have a great day!",
@@ -176,6 +178,16 @@
   "Where can I find the star earring?",
   "Can I buy the star earring here?",
   "How much does the star earring cost?",
+  "Is the Hoop Earring available?",
+  "Do you have a Hoop Earring in stock?",
+  "Can I get more info about the Hoop Earring?",
+  "What is the Hoop Earring made of?",
+  "Do you have any details on the Hoop Earring?",
+  "Give me some information on the Hoop Earring.",
+  "Show me the Hoop Earring.",
+  "Where can I find the Hoop Earring?",
+  "Can I buy the Hoop Earring here?",
+  "How much does the Hoop Earring cost?",
   "Star Earring",
   "Heart Pendant",
   "Brown Watch",
@@ -183,7 +195,11 @@
   "Amber Sunglass",
   "Butterfly Bracelet",
   "Lotus Ring",
-  "Vintage Watch"
+  "Vintage Watch",
+  "Trendy Sunglass",
+  "Pearl necklace",
+  "Hoop Earring",
+  "Lucky bracelet"
                 
         ],
         "responses": [
