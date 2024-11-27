@@ -1,6 +1,8 @@
 For admin:
-Username- rachana
-password- rachu7025
+<br>
+Username- admin
+<br>
+password- admin2024
 <br> work in progress :)
 <br>
 <br>
