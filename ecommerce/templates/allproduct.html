@@ -1,0 +1,266 @@
+{%extends 'main.html' %}
+{%load static%}
+{%block content%}
+
+<html>
+    <header>
+        <style>
+             * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            html, body {
+                width: 100%;
+                height: 100%;
+                overflow-x: hidden; /* Prevent horizontal scrolling */
+            }
+    
+            /* Main Slider Container */
+            #slider {
+                position: relative;
+                width: 90vw; /* Fullscreen width */
+                height: 70vh;
+                overflow: hidden;
+            }
+    
+            /* Slider Animation */
+            #slider figure {
+                display: flex;
+                position: absolute;
+                width: 800%; /* For multiple images */
+                margin: 0;
+                left: 0;
+                top: 0;
+                animation: sliderAnimation 15s infinite;
+            }
+    
+            #slider figure img {
+                width: 90vw; /* Fullscreen width for each image */
+                height: 70vh;
+                object-fit: cover; /* Ensures image fits nicely */
+            }
+    
+            /* Text Overlay for Each Slide */
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0); /* Slight dark overlay */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                text-align: center;
+            }
+    
+            .overlay h1 {
+                font-size: 3rem;
+                margin-bottom: 10px;
+                color: white;
+            }
+    
+            .overlay h5 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+                color: white;
+            }
+    
+            .overlay button {
+                background-color: #AB886D;
+                color: white;
+                border: 1px solid #54473F;
+                margin: 0 10px;
+                padding: 8px 16px;
+                border-radius: 5px;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+            }
+    
+            .overlay button:hover {
+                background-color: #54473F;
+                color: white;
+            }
+
+            .custom-aboutus{
+                width: 100%;
+                height: 530px;
+            }
+            /*pagintion*/
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            padding: 5px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #BA704F;
+        }
+
+        .pagination a:hover {
+            background-color: #B59F78;
+            color: white;
+        }
+
+        .pagination a:active {
+            background-color: #BA704F; 
+            color: white;
+            border: 1px solid #B59F78;  /* Match border with the brown color */
+        }
+
+        .pagination span {
+            font-weight: bold;
+        }
+        .custom-btn {
+            padding: 10px 20px;
+            border: 2px solid #B59F78;
+            border-radius: 5px;
+            background-color: transparent;
+            color: black;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .custom-btn:hover {
+            background-color: #B59F78;
+            color: white;
+        }
+        .page-link {
+    padding: 5px 15px;
+    border: 1px solid #ddd;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.page-link.active {
+    background-color: #B59F78;  /* Brown color */
+    color: white;
+}
+
+.page-link.disabled {
+    color: #ccc;
+    pointer-events: none;
+}
+
+
+        </style>
+    </header>
+</html>
+
+
+<header class="py-5">
+    <div class="container">
+            <div id="slider" style="height: 250px;">
+                <figure>
+                    <img src="{% static 'images/4.jpg' %}" alt="Image 1">
+                </figure>
+                <div class="overlay">
+                    <h1>Home>Our Products</h1>
+                </div>
+    </div>
+</header>
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-3">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for product in page_obj %}
+                {% if product.is_sale %}
+                    <div class="col mb-5">
+                        <div class="card h-100 box-element">
+                             <!-- Sale badge-->
+                             <div class="badge text-white position-absolute" style="top: 0.5rem; right: 0.5rem; background-color:#C62E2E;">Sale</div>
+                            <!-- Product image-->
+                            <img class="thumbnail" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <hr>
+                                    <h6><strike>Rs {{ product.price }}</strike></h6>
+                                    <h6>Rs {{ product.sale_price }}</h6>
+                                    In: {{ product.category }}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="custom-cart-button" href="{% url 'product' product.id %}">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col mb-5">
+                        <div class="card h-100 box-element">
+                            <!-- Product image-->
+                            <img class="thumbnail" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <hr>
+                                    <h6 style="display: inline-block;">Rs {{ product.price }}</h6>
+                                    <br>
+                                    In: {{ product.category }}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="custom-cart-button" href="{% url 'product' product.id %}">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Pagination Controls: Previous, Page Numbers, Next -->
+        <div class="pagination">
+            <!-- Previous Button -->
+            <span class="page-item">
+                {% if page_obj.has_previous %}
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% else %}
+                    <span class="page-link disabled">Previous</span>
+                {% endif %}
+            </span>
+
+            <!-- Page Number Links -->
+            {% for num in page_obj.paginator.page_range %}
+                <span class="page-item">
+                    {% if num == page_obj.number %}
+                        <span class="page-link active">{{ num }}</span>
+                    {% else %}
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                </span>
+            {% endfor %}
+
+            <!-- Next Button -->
+            <span class="page-item">
+                {% if page_obj.has_next %}
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% else %}
+                    <span class="page-link disabled">Next</span>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</section>
+
+
+{%endblock content%}
