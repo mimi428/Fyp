@@ -140,9 +140,7 @@
     border: 1px solid #ddd;
     color: #007bff;
     text-decoration: none;
-}
-
-.page-link.active {
+}.page-link.active {
     background-color: #B59F78;  
     color: white;
     border: #BA704F;
@@ -262,6 +260,14 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.card-body h5').forEach(el => {
+            el.textContent = el.textContent.replace(/_/g, ' ');
+        });
+    });
+  </script>
 
 
 {%endblock content%}
