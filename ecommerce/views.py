@@ -80,8 +80,11 @@ def register_user(request):
             messages.success(request,("There was an error. Please try again..."))
             return redirect('register')
     else:
-        return render(request,'register.html',{'form':form})
+        return render(request,'update_user.html',{})
     
+def update_user(request):
+    return render(request,'update_user.html',{})  
+
 def product(request,pk):
     product= Product.objects.get(id=pk)
     return render(request,'product.html',{'product':product})
